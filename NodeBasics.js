@@ -97,11 +97,11 @@ const fs = require("fs");
 // --------------------------
 
 // File Stream
-const readStream = fs.createReadStream("./docs/blog3.txt", {
-  encoding: "utf-8",
-});
+// const readStream = fs.createReadStream("./docs/blog3.txt", {
+//   encoding: "utf-8",
+// });
 
-const writeStream = fs.createWriteStream("./docs/blog4.txt")
+// const writeStream = fs.createWriteStream("./docs/blog4.txt")
 
 // readStream.on("data", (chunk) => {
 //   console.log(chunk);
