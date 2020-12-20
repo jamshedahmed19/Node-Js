@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const Blog = require("./models/blog");
+const blogRouter = require("./routes/blogRouter");
 const app = express();
 
 const dbURI =
@@ -20,6 +20,7 @@ app.set("view engine", "ejs");
 
 // middle ware and static files
 app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
 // if we don't name our html files folder 'views'
 //app.set("views", "folder_name_here");
 
@@ -65,23 +66,10 @@ app.get("/", (req, res) => {
   res.redirect("/blogs");
 });
 
-app.get("/blogs", (req, res) => {
-  Blog.find()
-    .sort({ createdAt: -1 })
-    .then((result) => {
-      res.render("index", { title: "Blogs", blogs: result });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
+app.use("/blogs", blogRouter);
 
 app.get("/about", (req, res) => {
   res.render("about", { title: "About" });
-});
-
-app.get("/blogs/create", (req, res) => {
-  res.render("create", { title: "Create a new Blog" });
 });
 
 // 404
